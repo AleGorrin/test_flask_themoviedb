@@ -1,0 +1,19 @@
+# Ignorar cachés de Redis
+cache/
+*.cache
+
+# Ignorar archivos de caché de Python
+__pycache__/
+*.py[cod]
+
+# Ignorar archivos de caché de Flask
+instance/
+.webassets-cache
+*.log
+
+# Ignorar otros archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*.DS_Store
