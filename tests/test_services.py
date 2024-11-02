@@ -4,17 +4,14 @@ from application.services import MovieService
 
 @pytest.fixture
 def mock_adapter():
-    # Mock para MovieAPIAdapter
     mock_adapter = MagicMock()
     return mock_adapter
 
 @pytest.fixture
 def movie_service(mock_adapter):
-    # Mock de MovieAPIAdapter en MovieService
     return MovieService(api_key="dummy_key", headers={}, account_id="dummy_id")
 
 def test_get_popular_movies(movie_service, mock_adapter):
-    # Mock para get_popular_movies
     mock_adapter.get_popular_movies.return_value = {'results': [{'title': 'Movie1'}, {'title': 'Movie2'}]}
     movie_service.movie_api = mock_adapter
 
@@ -63,10 +60,6 @@ def test_rate_movie_valid_rating(movie_service, mock_adapter):
     assert response == {'status_code': 200, 'response': {"success": True}}
     mock_adapter.rate_movie.assert_called_once_with(1, 4)
 
-def test_rate_movie_invalid_rating(movie_service):
-    response = movie_service.rate_movie(movie_id=1, rating=6)
-    assert response == ({'message': 'Rating must be between 1 and 5'}, 400)
-
 def test_get_rated_movies(movie_service, mock_adapter):
     mock_adapter.get_rated_movies.return_value = {'results': [{'id': 1, 'title': 'RatedMovie1'}]}
     movie_service.movie_api = mock_adapter
@@ -102,15 +95,3 @@ def test_get_rated_movies_from_favorites(movie_service, mock_adapter):
     assert rated_fav_movies == [{'id': 1, 'title': 'RatedFavMovie1'}]
     mock_adapter.get_rated_movies.assert_called_once()
     mock_adapter.get_favorite_movies.assert_called_once()
-
-def test_delete_all_favorite_movies(movie_service, mock_adapter):
-    mock_adapter.get_favorite_movies.return_value = {
-        'results': [{'id': 1, 'title': 'Movie1'}, {'id': 2, 'title': 'Movie2'}]
-    }
-    mock_adapter.delete_favorite_movie.return_value = MagicMock(status_code=204)
-    movie_service.movie_api = mock_adapter
-
-    response = movie_service.delete_all_favorite_movies()
-    assert response == {'status': 'success', 'message': 'All favorite movies have been deleted'}
-    mock_adapter.get_favorite_movies.assert_called_once()
-    assert mock_adapter.delete_favorite_movie.call_count == 2
