@@ -38,8 +38,11 @@ class MovieAPIAdapter:
         if self.redis_client:
             try:
                 self.redis_client.setex(key, duration, json.dumps(response))
-            except redis.exceptions.RedisError as e:
-                print(f"Error al guardar en caché: {e}", file=sys.stderr)
+            except:
+                if redis.exceptions.ConnectionError:
+                    print("Redis no está disponible, continuando sin caché.")
+                else:
+                    print(f"Error al guardar en caché: {redis.exceptions.RedisError}", file=sys.stderr)
 
     def _get_cached_response(self, key):
         if self.redis_client:
@@ -47,8 +50,11 @@ class MovieAPIAdapter:
                 cached_data = self.redis_client.get(key)
                 if cached_data:
                     return json.loads(cached_data)
-            except redis.exceptions.RedisError as e:
-                print(f"Error al recuperar del caché: {e}", file=sys.stderr)
+            except:
+                if redis.exceptions.ConnectionError:
+                    print("Redis no está disponible, continuando sin caché.")
+                else:
+                    print(f"Error al guardar en caché: {redis.exceptions.RedisError}", file=sys.stderr)
         return None
 
     @retry_with_backoff(max_retries=3, backoff_factor=2)

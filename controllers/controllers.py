@@ -13,46 +13,46 @@ movie_service = MovieService(api_key=development_config.THEMOVIEDB_API_KEY, head
 def get_popular_movies():
     return jsonify(movie_service.get_popular_movies())
 
+@movies_blueprint.route('/get_favorite_movies', methods=['GET'], endpoint='add_favorite_movie')
 @token_required
 @permission_required('USER')
-@movies_blueprint.route('/get_favorite_movies', methods=['GET'])
-def get_favorite_movies():
+def get_favorite_movies(user):
     return jsonify(movie_service.get_favorite_movies())
 
+@movies_blueprint.route('/add_favorite/<int:media_id>', methods=['POST'], endpoint='add_favorite_movie')
 @token_required
 @permission_required('USER')
-@movies_blueprint.route('/add_favorite/<int:media_id>', methods=['POST'])
-def add_favorite_movie(media_id):
+def add_favorite_movie(user, media_id):
     return jsonify(movie_service.add_favorite_movie(media_id))
 
+@movies_blueprint.route('/delete_favorite/<int:media_id>', methods=['DELETE'], endpoint='add_favorite_movie')
 @token_required
 @permission_required('USER')
-@movies_blueprint.route('/delete_favorite/<int:media_id>', methods=['DELETE'])
-def delete_favorite_movie(media_id):
+def delete_favorite_movie(user, media_id):
     return jsonify(movie_service.delete_favorite_movie(media_id))
 
+@movies_blueprint.route('/rate_movie/<int:movie_id>/<int:rating>', methods=['POST'], endpoint='add_favorite_movie')
 @token_required
 @permission_required('USER')
-@movies_blueprint.route('/rate_movie/<int:movie_id>/<int:rating>', methods=['POST'])
-def rate_movie(movie_id, rating):
+def rate_movie(user, movie_id, rating):
     return jsonify(movie_service.rate_movie(movie_id, rating))
 
+@movies_blueprint.route('/get_rated_movies', methods=['GET'], endpoint='add_favorite_movie')
 @token_required
 @permission_required('USER')
-@movies_blueprint.route('/get_rated_movies', methods=['GET'])
-def get_rated_movies():
+def get_rated_movies(user):
     return jsonify(movie_service.get_rated_movies())
 
+@movies_blueprint.route('/get_favorite_movies_by_release_date', methods=['GET'], endpoint='add_favorite_movie')
 @token_required
 @permission_required('USER')
-@movies_blueprint.route('/get_favorite_movies_by_release_date', methods=['GET'])
-def get_favorite_movies_by_release_date():
+def get_favorite_movies_by_release_date(user):
     return jsonify(movie_service.get_favorite_movies_by_release_date())
 
+@movies_blueprint.route('/rated_movies_from_favorites', methods=['GET'], endpoint='add_favorite_movie')
 @token_required
 @permission_required('USER')
-@movies_blueprint.route('/rated_movies_from_favorites', methods=['GET'])
-def rated_movies_from_favorites():
+def rated_movies_from_favorites(user):
     return jsonify(movie_service.get_rated_movies_from_favorites())
 
 @movies_blueprint.route('/delete_favorite_movies', methods=['DELETE'])
