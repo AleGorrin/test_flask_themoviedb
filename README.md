@@ -10,7 +10,7 @@ Instalar docker y docker-compose
 #### Setup
 clona este repositorio y construye el contenedor docker con docker-compose
 
-    git clone git@github.com:AleGorrin/test_flask_themoviedb.git
+    git clone https://github.com/AleGorrin/test_flask_themoviedb.git
     cd test_flask_themoviedb
     docker-compose up -d
 
