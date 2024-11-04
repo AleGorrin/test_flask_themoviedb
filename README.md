@@ -8,7 +8,7 @@ El proyecto desarrolla una API RESTful en Flask que se conecta a The Movie Datab
 Instalar docker y docker-compose
 
 #### Setup
-clona este repositorio y construye el contenedor docker con docker-compose
+Clona este repositorio y construye el contenedor docker con docker-compose
 
     git clone https://github.com/AleGorrin/test_flask_themoviedb.git
     cd test_flask_themoviedb
@@ -18,13 +18,13 @@ clona este repositorio y construye el contenedor docker con docker-compose
 
 La forma recomendable de uso es mediante Postman, ya que la mayoría de solicitudes y peticiones requieren de una autorización.
 
-Se especificarán los Endpoints siendo localhost:5000 la base de cada uno.
+Se especificarán los Endpoints siendo localhost:5000 la base de cada uno. Al enviar la petición, en la sección de header, se debe agregar:
 
-Al enviar la petición, en la sección de header, se debe agregar:
+key: Authorization, Value: (número de ID) donde el value para realizar pruebas son:
 
-key: Authorization, Value: número donde el value para realizar pruebas son:
+1 corresponde al ID del Admin 
 
-1 Para Admin 2 Para Consumidor
+2 corresponde al ID del Consumidor
 
 NOTA: Estos se encuentran hardcodeados en el proyecto, ya que el enfoque no es la creación y manejo de usuarios. 
 
