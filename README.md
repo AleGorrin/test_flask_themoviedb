@@ -16,16 +16,23 @@ clona este repositorio y construye el contenedor docker con docker-compose
 
 #### Uso 
 
-La forma recomendable de usar es mediante Postman, ya que la mayoria de solicitudes y peticiones requieren de una autorizacion, primero, se especificaran los Endpoints siendo localhost:5000 la base de cada uno.
-Al enviar la peticion, en la seccion de header, se debe agregar 
+La forma recomendable de uso es mediante Postman, ya que la mayoría de solicitudes y peticiones requieren de una autorización.
 
-key:Authorization, Value: numero
-dondel el value para realizar pruebas son 
-1 para admin
-2 para consumidor
-NOTA: Estos se encuentran hardcodeados en el proyecto, ya que el enfoque no es creacion y manejo de usuarios. 
+Se especificarán los Endpoints siendo localhost:5000 la base de cada uno.
+
+Al enviar la petición, en la sección de header, se debe agregar:
+
+key: Authorization, Value: número donde el value para realizar pruebas son:
+
+1 Para Admin 2 Para Consumidor
+
+NOTA: Estos se encuentran hardcodeados en el proyecto, ya que el enfoque no es la creación y manejo de usuarios. 
 
 #### Endpoints disponibles:
+
+NOTA: Debe colocar siempre al inicio localhost:5000. 
+
+Por ejemplo: localhost:5000/populars
 
 /populars
 - Salida: JSON con las películas populares de TMDB.
@@ -48,7 +55,7 @@ NOTA: Estos se encuentran hardcodeados en el proyecto, ya que el enfoque no es c
 
 /get_favorite_movies_by_release_date
 - Entrada: ID USER/ADMIN
-- Salida: JSON con las peliculas favoritas ordenadas fecha de salida
+- Salida: JSON con las peliculas favoritas ordenadas por fecha de salida
 
 /get_favorite_movies
 - Entrada: ID USER/ADMIN
@@ -58,11 +65,11 @@ NOTA: Estos se encuentran hardcodeados en el proyecto, ya que el enfoque no es c
 - Entrada: ID ADMIN
 - Salida: JSON con el estado de la operación.
 
-#### NOTA: Este desarrollo implementa redis para guardar en la cache las listas obtenidas con GET y para aplicar se ajustaron 30 segundos antes de eliminar la cache.Por lo que, si se realiza una peticion get_favorite y luego add_favorite, no se vera reflejado al realizar la peticion nueva mente de get_favorite hasta pasar los 30 segundos.
-#### NOTA: Si bien el desarrollo posee un docker-compose, el aplicativo corre por su cuenta sin depender de redis, realizando las acciones de no encontrara a redis conectado.
+#### NOTA: Este desarrollo implementa redis para guardar en la cache las listas obtenidas con GET y para aplicar se ajustaron 30 segundos antes de eliminar la cache.Por lo que, si se realiza una petición get_favorite y luego add_favorite, no se vera reflejado al realizar la peticion nuevamente de get_favorite hasta pasar los 30 segundos.
+#### NOTA: Si bien el desarrollo posee un docker-compose, el aplicativo corre por su cuenta sin depender de redis, realizando las acciones de no encontrar a redis conectado.
 
 ### Estructura del proyecto
-El proyecto esta estructurado usando arquitectura hexagonal, por lo que cada capa cumple un rol en especifico y mantiene aislamiento. Las capas son las siguientes:
+El proyecto esta estructurado usando arquitectura hexagonal, por lo que cada capa cumple un rol en específico y mantiene aislamiento. Las capas son las siguientes:
 
 - **Controllers**: Manejan las solicitudes HTTP y devuelven respuestas JSON. Son responsables de interactuar con los servicios de aplicación.
   
@@ -76,7 +83,7 @@ El proyecto esta estructurado usando arquitectura hexagonal, por lo que cada cap
 - **Tests**: Posee los tests para cada seccion del proyecto.
 
 #### Testing
-Para ejecutar los tests se debe tener la libreria pytest. En la siguiente seccion, se muestra el cmd esperado para correr las pruebas en un virtualenv, de tal forma que no se instale pytest de forma principal.
+Para ejecutar los tests se debe tener la libreria pytest. En la siguiente sección, se muestra el cmd esperado para correr las pruebas en un virtualenv, de tal forma que no se instale pytest de forma principal.
 
     git clone git@github.com:AleGorrin/test_flask_themoviedb.git
     cd test_flask_themoviedb
