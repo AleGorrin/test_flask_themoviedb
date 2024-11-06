@@ -1,4 +1,4 @@
-## FLASK CON IMPLEMENTACION DE THEMOBIESDB
+## FLASK CON IMPLEMENTACION DE THEMOVIESDB
 
 ### OVERVIEW
 El proyecto desarrolla una API RESTful en Flask que se conecta a The Movie Database (TMDB) siguiendo una arquitectura hexagonal para una clara separación de responsabilidades.
