@@ -90,7 +90,7 @@ Para ejecutar los tests se debe tener la libreria pytest. En la siguiente secci√
     pip install virutalenv 
     virtualenv -p python env
     .\env\Scripts\activate
-    pip install pytest==8.3.3
+    pip install -r requirements.txt
     pytest tests -v
 
     .\env\Scripts\deactivate
